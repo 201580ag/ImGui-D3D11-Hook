@@ -8,7 +8,8 @@
 [디자인](https://github.com/GraphicsProgramming/dear-imgui-styles)  
 [폰트 적용 관련 도움](https://dlemrcnd.tistory.com/650)  
 [현재 적용된 폰트(나눔 폰트)](https://hangeul.naver.com/font)  
-**폰트 적용 방법**
+
+**폰트 적용 방법** 
 ```
 1. `HxD` 를설치한다.
 2. 원하는 폰트를 다운 받는다.(.ttf)
@@ -16,6 +17,15 @@
 4. 그리고 저장 또는 클립보드 복사를 C 형식으로 한다.
 5. 복사나 저장한 C로 변환된 폰트를 `font.h` 안에 넣는다.
 ```
+`u8`을 붙혀준다.
+예) ImGui::Begin(u8"테스트");
+    ImGui::Button(u8"테스트 버튼");
+    ImGui::Text(u8"테스트 텍스트");
+> u8은 C++11 이상에서 도입된 UTF-8 인코딩의 문자열 리터럴 표기법    
+```
+
+**한글 출력 방법**
+
 
 **디자이너 레포지토리 및 웹 버전:**  
 [디자이너 레포지토리 링크](https://github.com/Raais/ImStudio)  
