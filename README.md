@@ -1,4 +1,4 @@
-# ImGui-d3d11-hook
+ # ImGui-d3d11-hook
 
 **`ImGui Hook`을 학습할 수 있는 곳입니다.**  
 [학습 영상](https://www.youtube.com/watch?v=4659KaH4ON8)  
@@ -8,8 +8,8 @@
 [디자인](https://github.com/GraphicsProgramming/dear-imgui-styles)  
 [폰트 적용 관련 도움](https://dlemrcnd.tistory.com/650)  
 [현재 적용된 폰트(나눔 폰트)](https://hangeul.naver.com/font)  
+**폰트 적용 방법**
 ```
-# 폰트 적용 방법
 1. `HxD` 를설치한다.
 2. 원하는 폰트를 다운 받는다.(.ttf)
 3. HxD 에 폰트(.ttf) 파일을 넣는다.
