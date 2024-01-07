@@ -17,8 +17,21 @@ void InitImGui()
     ImGui_ImplWin32_Init(window); // ImGui Win32 초기화
     ImGui_ImplDX11_Init(pDevice, pContext); // ImGui DirectX 11 초기화
 
+    // 폰트 설정을 위한 구성 구조체 생성
+    ImFontConfig fontConfig;
+    fontConfig.FontDataOwnedByAtlas = false; // ImGui가 폰트 데이터를 소유하지 않도록 설정
+
+    // 메모리에 있는 TTF 폰트 데이터를 ImGui 폰트에 추가
+    // rawData: 폰트 데이터 배열의 포인터
+    // sizeof(rawData): 폰트 데이터 배열의 크기
+    // 18.5f: 폰트 크기
+    // &fontConfig: 폰트 설정 구조체 포인터
+    // io.Fonts->GetGlyphRangesKorean(): 한글 범위를 지정하는 함수 호출
+    io.Fonts->AddFontFromMemoryTTF(rawData, sizeof(rawData), 18.5f, &fontConfig, io.Fonts->GetGlyphRangesKorean());
+    
     ImGuiStyle& style = ImGui::GetStyle(); // ImGui 스타일 객체 가져오기
-    // 아래에 폰트나 디자인 관련 코드를 넣어 주세요.
+    // 아래에 디자인 관련 코드를 넣어 주세요.
+    
 }
 
 LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
