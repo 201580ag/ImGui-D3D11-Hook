@@ -61,7 +61,26 @@ int frameCount = 0;
 float fps = 0.0f;
 
 // 렌더 타겟 설정 및 ImGui 렌더링
-pContext->OM제**
+pContext->OMSetRenderTargets(1, &mainRenderTargetView, NULL);
+
+// 어플리케이션의 FPS 측정 및 표시
+auto currentFrameTime = std::chrono::high_resolution_clock::now();
+std::chrono::duration<float> deltaTime = currentFrameTime - lastFrameTime;
+frameCount++;
+if (deltaTime.count() >= 1.0f) {
+fps = static_cast<float>(frameCount) / deltaTime.count();
+frameCount = 0;
+lastFrameTime = currentFrameTime;
+}
+
+// FPS를 ImGui 창에 표시
+ImGui::SetNextWindowPos(ImVec2(0, 30));  // 창 위치를 좌측 상단으로 설정
+ImGui::Begin(u8"어플리케이션 FPS", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | NULL | 129);
+ImGui::TextColored(ImVec4(0, 0, 0, 1), u8"FPS: %.5f", fps);
+ImGui::End();
+```
+
+**화면 정중앙에 빨간점을 표시하는 예제** 
 ```cpp
     ImGui::NewFrame();
 
