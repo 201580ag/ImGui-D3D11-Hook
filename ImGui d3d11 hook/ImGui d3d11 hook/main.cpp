@@ -1,105 +1,108 @@
 #include "includes.h"
 
-extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam); // ImGui ÇÚµé·¯ ÇÔ¼ö ¼±¾ğ
+extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam); // ImGui í•¸ë“¤ëŸ¬ í•¨ìˆ˜ ì„ ì–¸
 
-Present oPresent; // Present ÇÔ¼ö Æ÷ÀÎÅÍ ¼±¾ğ
-HWND window = NULL; // À©µµ¿ì ÇÚµé ÀúÀå º¯¼ö ¼±¾ğ ¹× ÃÊ±âÈ­
-WNDPROC oWndProc; // ±âÁ¸ À©µµ¿ì ÇÁ·Î½ÃÀú ÇÔ¼ö Æ÷ÀÎÅÍ ¼±¾ğ
-ID3D11Device* pDevice = NULL; // Direct3D 11 ÀåÄ¡ Æ÷ÀÎÅÍ º¯¼ö ¼±¾ğ
-ID3D11DeviceContext* pContext = NULL; // Direct3D 11 ÀåÄ¡ ÄÁÅØ½ºÆ® Æ÷ÀÎÅÍ º¯¼ö ¼±¾ğ
-ID3D11RenderTargetView* mainRenderTargetView; // Direct3D 11 ·»´õ Å¸°Ù ºä Æ÷ÀÎÅÍ º¯¼ö ¼±¾ğ
+Present oPresent; // Present í•¨ìˆ˜ í¬ì¸í„° ì„ ì–¸
+HWND window = NULL; // ìœˆë„ìš° í•¸ë“¤ ì €ì¥ ë³€ìˆ˜ ì„ ì–¸ ë° ì´ˆê¸°í™”
+WNDPROC oWndProc; // ê¸°ì¡´ ìœˆë„ìš° í”„ë¡œì‹œì € í•¨ìˆ˜ í¬ì¸í„° ì„ ì–¸
+ID3D11Device* pDevice = NULL; // Direct3D 11 ì¥ì¹˜ í¬ì¸í„° ë³€ìˆ˜ ì„ ì–¸
+ID3D11DeviceContext* pContext = NULL; // Direct3D 11 ì¥ì¹˜ ì»¨í…ìŠ¤íŠ¸ í¬ì¸í„° ë³€ìˆ˜ ì„ ì–¸
+ID3D11RenderTargetView* mainRenderTargetView; // Direct3D 11 ë Œë” íƒ€ê²Ÿ ë·° í¬ì¸í„° ë³€ìˆ˜ ì„ ì–¸
 
 void InitImGui()
 {
-    ImGui::CreateContext(); // ImGui ÄÁÅØ½ºÆ® »ı¼º
-    ImGuiIO& io = ImGui::GetIO(); // ImGui ÀÔÃâ·Â °´Ã¼ °¡Á®¿À±â
-    io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange; // ¸¶¿ì½º Ä¿¼­ º¯°æ ºñÈ°¼ºÈ­ ÇÃ·¡±× ¼³Á¤
-    ImGui_ImplWin32_Init(window); // ImGui Win32 ÃÊ±âÈ­
-    ImGui_ImplDX11_Init(pDevice, pContext); // ImGui DirectX 11 ÃÊ±âÈ­
+    ImGui::CreateContext(); // ImGui ì»¨í…ìŠ¤íŠ¸ ìƒì„±
+    ImGuiIO& io = ImGui::GetIO(); // ImGui ì…ì¶œë ¥ ê°ì²´ ê°€ì ¸ì˜¤ê¸°
+    io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange; // ë§ˆìš°ìŠ¤ ì»¤ì„œ ë³€ê²½ ë¹„í™œì„±í™” í”Œë˜ê·¸ ì„¤ì •
+    ImGui_ImplWin32_Init(window); // ImGui Win32 ì´ˆê¸°í™”
+    ImGui_ImplDX11_Init(pDevice, pContext); // ImGui DirectX 11 ì´ˆê¸°í™”
+
+    ImGuiStyle& style = ImGui::GetStyle(); // ImGui ìŠ¤íƒ€ì¼ ê°ì²´ ê°€ì ¸ì˜¤ê¸°
+    // ì•„ë˜ì— í°íŠ¸ë‚˜ ë””ìì¸ ê´€ë ¨ ì½”ë“œë¥¼ ë„£ì–´ ì£¼ì„¸ìš”.
 }
 
 LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-    if (true && ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam)) // ImGui ÇÚµé·¯¿¡ ¸Ş½ÃÁö Àü´Ş ¹× Ã³¸® ¿©ºÎ È®ÀÎ
+    if (true && ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam)) // ImGui í•¸ë“¤ëŸ¬ì— ë©”ì‹œì§€ ì „ë‹¬ ë° ì²˜ë¦¬ ì—¬ë¶€ í™•ì¸
         return true;
 
-    return CallWindowProc(oWndProc, hWnd, uMsg, wParam, lParam); // ±âÁ¸ À©µµ¿ì ÇÁ·Î½ÃÀú ÇÔ¼ö È£Ãâ
+    return CallWindowProc(oWndProc, hWnd, uMsg, wParam, lParam); // ê¸°ì¡´ ìœˆë„ìš° í”„ë¡œì‹œì € í•¨ìˆ˜ í˜¸ì¶œ
 }
 
-bool init = false; // ÃÊ±âÈ­ »óÅÂ ÇÃ·¡±×
+bool init = false; // ì´ˆê¸°í™” ìƒíƒœ í”Œë˜ê·¸
 
-// Direct3D 11ÀÇ Present ÇÔ¼ö ÈÄÅ·µÈ ¹öÀü
+// Direct3D 11ì˜ Present í•¨ìˆ˜ í›„í‚¹ëœ ë²„ì „
 HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags)
 {
-    // ÃÊ±âÈ­µÇÁö ¾ÊÀº °æ¿ì ÃÊ±âÈ­ ¼öÇà
+    // ì´ˆê¸°í™”ë˜ì§€ ì•Šì€ ê²½ìš° ì´ˆê¸°í™” ìˆ˜í–‰
     if (!init)
     {
-        // ÀåÄ¡ ¹× ÄÁÅØ½ºÆ® °¡Á®¿À±â
+        // ì¥ì¹˜ ë° ì»¨í…ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
         if (SUCCEEDED(pSwapChain->GetDevice(__uuidof(ID3D11Device), (void**)&pDevice)))
         {
             pDevice->GetImmediateContext(&pContext);
 
-            // ½º¿Ò Ã¼ÀÎ ¼³Á¤ °¡Á®¿À±â
+            // ìŠ¤ì™‘ ì²´ì¸ ì„¤ì • ê°€ì ¸ì˜¤ê¸°
             DXGI_SWAP_CHAIN_DESC sd;
             pSwapChain->GetDesc(&sd);
             window = sd.OutputWindow;
 
-            // ¹é ¹öÆÛ »ı¼º ¹× ·»´õ Å¸°Ù ºä »ı¼º
+            // ë°± ë²„í¼ ìƒì„± ë° ë Œë” íƒ€ê²Ÿ ë·° ìƒì„±
             ID3D11Texture2D* pBackBuffer;
             pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
             pDevice->CreateRenderTargetView(pBackBuffer, NULL, &mainRenderTargetView);
             pBackBuffer->Release();
 
-            // ±âÁ¸ À©µµ¿ì ÇÁ·Î½ÃÀú ÇÔ¼ö ÈÄÅ·
+            // ê¸°ì¡´ ìœˆë„ìš° í”„ë¡œì‹œì € í•¨ìˆ˜ í›„í‚¹
             oWndProc = (WNDPROC)SetWindowLongPtr(window, GWLP_WNDPROC, (LONG_PTR)WndProc);
 
-            // ImGui ÃÊ±âÈ­
+            // ImGui ì´ˆê¸°í™”
             InitImGui();
 
-            // ÃÊ±âÈ­ ¿Ï·á ÇÃ·¡±× ¼³Á¤
+            // ì´ˆê¸°í™” ì™„ë£Œ í”Œë˜ê·¸ ì„¤ì •
             init = true;
         }
         else
         {
-            // ÃÊ±âÈ­¿¡ ½ÇÆĞÇÏ¸é ±âÁ¸ Present ÇÔ¼ö È£Ãâ
+            // ì´ˆê¸°í™”ì— ì‹¤íŒ¨í•˜ë©´ ê¸°ì¡´ Present í•¨ìˆ˜ í˜¸ì¶œ
             return oPresent(pSwapChain, SyncInterval, Flags);
         }
     }
 
-    // ImGui ÇÁ·¹ÀÓ ¼³Á¤
+    // ImGui í”„ë ˆì„ ì„¤ì •
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
-    // ImGui À©µµ¿ì ·»´õ¸µ
+    // ImGui ìœˆë„ìš° ë Œë”ë§
     ImGui::Begin("ImGui Window");
     ImGui::End();
 
     ImGui::Render();
 
-    // ·»´õ Å¸°Ù ¼³Á¤ ¹× ImGui ·»´õ¸µ
+    // ë Œë” íƒ€ê²Ÿ ì„¤ì • ë° ImGui ë Œë”ë§
     pContext->OMSetRenderTargets(1, &mainRenderTargetView, NULL);
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
-    // ±âÁ¸ Present ÇÔ¼ö È£Ãâ
+    // ê¸°ì¡´ Present í•¨ìˆ˜ í˜¸ì¶œ
     return oPresent(pSwapChain, SyncInterval, Flags);
 }
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
-    bool init_hook = false; // ÈÄÅ· ÃÊ±âÈ­ »óÅÂ ÇÃ·¡±×
+    bool init_hook = false; // í›„í‚¹ ì´ˆê¸°í™” ìƒíƒœ í”Œë˜ê·¸
 
     do
     {
-        // kiero ÃÊ±âÈ­ ¹× D3D11 ÈÄÅ· ½Ãµµ
+        // kiero ì´ˆê¸°í™” ë° D3D11 í›„í‚¹ ì‹œë„
         if (kiero::init(kiero::RenderType::D3D11) == kiero::Status::Success)
         {
-            kiero::bind(8, (void**)&oPresent, hkPresent); // Present ÇÔ¼ö ÈÄÅ·
-            init_hook = true; // ÈÄÅ· ÃÊ±âÈ­ ¿Ï·á ÇÃ·¡±× ¼³Á¤
+            kiero::bind(8, (void**)&oPresent, hkPresent); // Present í•¨ìˆ˜ í›„í‚¹
+            init_hook = true; // í›„í‚¹ ì´ˆê¸°í™” ì™„ë£Œ í”Œë˜ê·¸ ì„¤ì •
         }
     } while (!init_hook);
 
-    return TRUE; // ½º·¹µå Á¾·á
+    return TRUE; // ìŠ¤ë ˆë“œ ì¢…ë£Œ
 }
 
 BOOL WINAPI DllMain(HMODULE hMod, DWORD dwReason, LPVOID lpReserved)
@@ -107,11 +110,11 @@ BOOL WINAPI DllMain(HMODULE hMod, DWORD dwReason, LPVOID lpReserved)
     switch (dwReason)
     {
     case DLL_PROCESS_ATTACH:
-        DisableThreadLibraryCalls(hMod); // ½º·¹µå ¶óÀÌºê·¯¸® È£Ãâ ºñÈ°¼ºÈ­
-        CreateThread(nullptr, 0, MainThread, hMod, 0, nullptr); // ÁÖ ½º·¹µå »ı¼º
+        DisableThreadLibraryCalls(hMod); // ìŠ¤ë ˆë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬ í˜¸ì¶œ ë¹„í™œì„±í™”
+        CreateThread(nullptr, 0, MainThread, hMod, 0, nullptr); // ì£¼ ìŠ¤ë ˆë“œ ìƒì„±
         break;
     case DLL_PROCESS_DETACH:
-        kiero::shutdown(); // kiero ¶óÀÌºê·¯¸® Á¾·á
+        kiero::shutdown(); // kiero ë¼ì´ë¸ŒëŸ¬ë¦¬ ì¢…ë£Œ
         break;
     }
 
