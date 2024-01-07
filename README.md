@@ -32,7 +32,7 @@
 [디자이너 레포지토리 링크](https://github.com/Raais/ImStudio)  
 [웹 버전 링크](https://raais.github.io/ImStudio)  
 
-### 예제 목록
+# 예제 목록
 **현재 시간, 날짜 출력 예제** 
 ```cpp
     ImGui::NewFrame();
