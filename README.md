@@ -8,6 +8,7 @@
 [디자인](https://github.com/GraphicsProgramming/dear-imgui-styles)  
 [폰트 적용 관련 도움](https://dlemrcnd.tistory.com/650)  
 [현재 적용된 폰트(나눔 폰트)](https://hangeul.naver.com/font)  
+> 지금 `font.h` 안에 있는 폰트는 `NanumGothic.ttf` 입니다.
 
 **폰트 적용 방법** 
 ```
