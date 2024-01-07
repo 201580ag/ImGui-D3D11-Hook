@@ -31,3 +31,24 @@
 **디자이너 레포지토리 및 웹 버전:**  
 [디자이너 레포지토리 링크](https://github.com/Raais/ImStudio)  
 [웹 버전 링크](https://raais.github.io/ImStudio)  
+
+**현재 시간, 날짜 출력 예제** 
+```cpp
+    ImGui::NewFrame();
+    // 현재시간, 날짜 ImGui 창
+    ImGui::SetNextWindowSize(ImVec2(200, 50));  // 창 크기 고정
+    ImGui::Begin(u8"현재 시간", NULL, 135);
+
+    // 실시간으로 시간을 업데이트
+    std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+    struct tm localTime;
+    localtime_s(&localTime, &now);
+    char buffer[80];
+    strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", &localTime);
+    std::string timeString(buffer);
+
+    // 실시간으로 업데이트된 시간을 검은색으로 표시
+    ImGui::TextColored(ImVec4(0, 0, 0, 1), u8"현재 시간: %s", timeString.c_str());
+
+    ImGui::End();
+```
