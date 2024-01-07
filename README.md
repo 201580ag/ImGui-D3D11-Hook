@@ -83,14 +83,14 @@ ImGui::End();
 
 **화면 정중앙에 빨간점을 표시하는 예제** 
 ```cpp
-    ImGui::NewFrame();
+ImGui::NewFrame();
 
-    // 화면 정중앙에 빨간 원을 그리기
-    ImVec2 center = ImVec2(ImGui::GetIO().DisplaySize.x * 0.5f, ImGui::GetIO().DisplaySize.y * 0.5f);
-    float radius = 5.0f;
-    ImU32 redColor = IM_COL32(255, 0, 0, 255);
-    ImGui::GetBackgroundDrawList()->AddCircleFilled(center, radius, redColor);
+// 화면 정중앙에 빨간 원을 그리기
+ImVec2 center = ImVec2(ImGui::GetIO().DisplaySize.x * 0.5f, ImGui::GetIO().DisplaySize.y * 0.5f);
+float radius = 5.0f;
+ImU32 redColor = IM_COL32(255, 0, 0, 255);
+ImGui::GetBackgroundDrawList()->AddCircleFilled(center, radius, redColor);
 
-    // ImGui 렌더링
-    ImGui::Render();
+// ImGui 렌더링
+ImGui::Render();
 ```
