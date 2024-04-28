@@ -59,9 +59,9 @@
 **현재 FPS를 출력하는 예제** 
 ```cpp
 // 어플리케이션의 FPS를 측정하기 위한 변수들
-std::chrono::time_point<std::chrono::high_resolution_clock> lastFrameTime;
-int frameCount = 0;
-float fps = 0.0f;
+static std::chrono::time_point<std::chrono::high_resolution_clock> lastFrameTime = std::chrono::high_resolution_clock::now(); // 초기 시간 설정
+static int frameCount = 0;
+static float fps = 0.0f;
 
 // 렌더 타겟 설정 및 ImGui 렌더링
 pContext->OMSetRenderTargets(1, &mainRenderTargetView, NULL);
@@ -71,9 +71,9 @@ auto currentFrameTime = std::chrono::high_resolution_clock::now();
 std::chrono::duration<float> deltaTime = currentFrameTime - lastFrameTime;
 frameCount++;
 if (deltaTime.count() >= 1.0f) {
-fps = static_cast<float>(frameCount) / deltaTime.count();
-frameCount = 0;
-lastFrameTime = currentFrameTime;
+    fps = static_cast<float>(frameCount) / deltaTime.count();
+    frameCount = 0;
+    lastFrameTime = currentFrameTime; // 마지막 프레임 시간 업데이트
 }
 
 // FPS를 ImGui 창에 표시
