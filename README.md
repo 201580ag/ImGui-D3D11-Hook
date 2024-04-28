@@ -35,6 +35,10 @@
 # 예제 목록
 **현재 시간, 날짜 출력 예제** 
 ```cpp
+    #include <chrono>
+    #include <ctime>
+    #include <string>
+
     ImGui::NewFrame();
     // 현재시간, 날짜 ImGui 창
     ImGui::SetNextWindowSize(ImVec2(200, 50));  // 창 크기 고정
