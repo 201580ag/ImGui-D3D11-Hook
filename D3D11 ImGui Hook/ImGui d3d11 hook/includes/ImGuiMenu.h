@@ -1,13 +1,13 @@
 #pragma once
-#include "includes/includes.h"
+#include "includes.h"
 
 void ImGuiMenu() {
-    // ImGui ÇÁ·¹ÀÓ ¼³Á¤
+    // ImGui í”„ë ˆì„ ì„¤ì •
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
-    // ImGui À©µµ¿ì ·»´õ¸µ
+    // ImGui ìœˆë„ìš° ë Œë”ë§
     ImGui::Begin(u8"ImGui Window");
     ImGui::Text(u8"abc");
     ImGui::End();
