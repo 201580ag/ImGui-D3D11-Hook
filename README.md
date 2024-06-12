@@ -32,6 +32,17 @@
 [디자이너 레포지토리 링크](https://github.com/Raais/ImStudio)  
 [웹 버전 링크](https://raais.github.io/ImStudio)  
 
+# 메모리 관련
+## 오프셋 추가방법
+```cpp
+constexpr DWORD OffsetName = 0x???
+```
+## 메모리 읽기&쓰기
+```cpp
+uintptr_t moduleBase = (uintptr_t)GetModuleHandle("대상프로세스(exe, dll)");
+*(float*)mem::FindAddress(moduleBase + Base, { OffsetName })); // 예시 값 float
+```
+
 # 예제 목록
 **현재 시간, 날짜 출력 예제** 
 ```cpp
