@@ -1,31 +1,31 @@
 #pragma once
-#include "includes/includes.h"
+#include "/includes.h"
 
-HWND window = NULL; // À©µµ¿ì ÇÚµé ÀúÀå º¯¼ö ¼±¾ğ ¹× ÃÊ±âÈ­
-ID3D11Device* pDevice = NULL; // Direct3D 11 ÀåÄ¡ Æ÷ÀÎÅÍ º¯¼ö ¼±¾ğ
-ID3D11DeviceContext* pContext = NULL; // Direct3D 11 ÀåÄ¡ ÄÁÅØ½ºÆ® Æ÷ÀÎÅÍ º¯¼ö ¼±¾ğ
+HWND window = NULL; // ìœˆë„ìš° í•¸ë“¤ ì €ì¥ ë³€ìˆ˜ ì„ ì–¸ ë° ì´ˆê¸°í™”
+ID3D11Device* pDevice = NULL; // Direct3D 11 ì¥ì¹˜ í¬ì¸í„° ë³€ìˆ˜ ì„ ì–¸
+ID3D11DeviceContext* pContext = NULL; // Direct3D 11 ì¥ì¹˜ ì»¨í…ìŠ¤íŠ¸ í¬ì¸í„° ë³€ìˆ˜ ì„ ì–¸
 
 void InitImGui()
 {
-    ImGui::CreateContext(); // ImGui ÄÁÅØ½ºÆ® »ı¼º
-    ImGuiIO& io = ImGui::GetIO(); // ImGui ÀÔÃâ·Â °´Ã¼ °¡Á®¿À±â
-    io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange; // ¸¶¿ì½º Ä¿¼­ º¯°æ ºñÈ°¼ºÈ­ ÇÃ·¡±× ¼³Á¤
-    ImGui_ImplWin32_Init(window); // ImGui Win32 ÃÊ±âÈ­
-    ImGui_ImplDX11_Init(pDevice, pContext); // ImGui DirectX 11 ÃÊ±âÈ­
+    ImGui::CreateContext(); // ImGui ì»¨í…ìŠ¤íŠ¸ ìƒì„±
+    ImGuiIO& io = ImGui::GetIO(); // ImGui ì…ì¶œë ¥ ê°ì²´ ê°€ì ¸ì˜¤ê¸°
+    io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange; // ë§ˆìš°ìŠ¤ ì»¤ì„œ ë³€ê²½ ë¹„í™œì„±í™” í”Œë˜ê·¸ ì„¤ì •
+    ImGui_ImplWin32_Init(window); // ImGui Win32 ì´ˆê¸°í™”
+    ImGui_ImplDX11_Init(pDevice, pContext); // ImGui DirectX 11 ì´ˆê¸°í™”
 
-    // ÆùÆ® ¼³Á¤À» À§ÇÑ ±¸¼º ±¸Á¶Ã¼ »ı¼º
+    // í°íŠ¸ ì„¤ì •ì„ ìœ„í•œ êµ¬ì„± êµ¬ì¡°ì²´ ìƒì„±
     ImFontConfig fontConfig;
-    fontConfig.FontDataOwnedByAtlas = false; // ImGui°¡ ÆùÆ® µ¥ÀÌÅÍ¸¦ ¼ÒÀ¯ÇÏÁö ¾Êµµ·Ï ¼³Á¤
+    fontConfig.FontDataOwnedByAtlas = false; // ImGuiê°€ í°íŠ¸ ë°ì´í„°ë¥¼ ì†Œìœ í•˜ì§€ ì•Šë„ë¡ ì„¤ì •
 
-    // ¸Ş¸ğ¸®¿¡ ÀÖ´Â TTF ÆùÆ® µ¥ÀÌÅÍ¸¦ ImGui ÆùÆ®¿¡ Ãß°¡
-    // rawData: ÆùÆ® µ¥ÀÌÅÍ ¹è¿­ÀÇ Æ÷ÀÎÅÍ
-    // sizeof(rawData): ÆùÆ® µ¥ÀÌÅÍ ¹è¿­ÀÇ Å©±â
-    // 18.5f: ÆùÆ® Å©±â
-    // &fontConfig: ÆùÆ® ¼³Á¤ ±¸Á¶Ã¼ Æ÷ÀÎÅÍ
-    // io.Fonts->GetGlyphRangesKorean(): ÇÑ±Û ¹üÀ§¸¦ ÁöÁ¤ÇÏ´Â ÇÔ¼ö È£Ãâ
+    // ë©”ëª¨ë¦¬ì— ìˆëŠ” TTF í°íŠ¸ ë°ì´í„°ë¥¼ ImGui í°íŠ¸ì— ì¶”ê°€
+    // rawData: í°íŠ¸ ë°ì´í„° ë°°ì—´ì˜ í¬ì¸í„°
+    // sizeof(rawData): í°íŠ¸ ë°ì´í„° ë°°ì—´ì˜ í¬ê¸°
+    // 18.5f: í°íŠ¸ í¬ê¸°
+    // &fontConfig: í°íŠ¸ ì„¤ì • êµ¬ì¡°ì²´ í¬ì¸í„°
+    // io.Fonts->GetGlyphRangesKorean(): í•œê¸€ ë²”ìœ„ë¥¼ ì§€ì •í•˜ëŠ” í•¨ìˆ˜ í˜¸ì¶œ
     io.Fonts->AddFontFromMemoryTTF(rawData, sizeof(rawData), 18.5f, &fontConfig, io.Fonts->GetGlyphRangesKorean());
 
-    ImGuiStyle& style = ImGui::GetStyle(); // ImGui ½ºÅ¸ÀÏ °´Ã¼ °¡Á®¿À±â
-    // ¾Æ·¡¿¡ µğÀÚÀÎ °ü·Ã ÄÚµå¸¦ ³Ö¾î ÁÖ¼¼¿ä.
+    ImGuiStyle& style = ImGui::GetStyle(); // ImGui ìŠ¤íƒ€ì¼ ê°ì²´ ê°€ì ¸ì˜¤ê¸°
+    // ì•„ë˜ì— ë””ìì¸ ê´€ë ¨ ì½”ë“œë¥¼ ë„£ì–´ ì£¼ì„¸ìš”.
 
 }
