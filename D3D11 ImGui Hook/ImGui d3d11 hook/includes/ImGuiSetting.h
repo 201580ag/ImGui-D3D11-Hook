@@ -1,5 +1,5 @@
 #pragma once
-#include "/includes.h"
+#include "includes.h"
 
 HWND window = NULL; // 윈도우 핸들 저장 변수 선언 및 초기화
 ID3D11Device* pDevice = NULL; // Direct3D 11 장치 포인터 변수 선언
