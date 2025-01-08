@@ -107,3 +107,15 @@ ImGui::GetBackgroundDrawList()->AddCircleFilled(center, radius, redColor);
 // ImGui 렌더링
 ImGui::Render();
 ```
+
+ImGui::Begin("INFO", NULL, 135);
+// 드로우 리스트
+//auto pDrawList = ImGui::GetWindowDrawList();
+//// 텍스트 및 도형 그리기
+//pDrawList->AddRect(ImVec2(10, 10), ImVec2(100, 100), ImColor(255, 0, 0));
+//pDrawList->AddText(ImVec2(10, 10), ImColor(255, 0, 0), "Health: 100");
+//pDrawList->AddText(ImVec2(10, 30), ImColor(255, 0, 0), "Armor: 100");
+//pDrawList->AddText(ImVec2(10, 50), ImColor(255, 0, 0), "Ammo: 30");
+//pDrawList->AddText(ImVec2(10, 70), ImColor(255, 0, 0), "Field of View X: 90");
+//pDrawList->AddText(ImVec2(10, 90), ImColor(255, 0, 0), "Field of View Y: 90");
+//pDrawList->AddText(ImVec2(10, 110), ImColor(255, 0, 0), "Position X: 100, Y: 100, Z: 100");
